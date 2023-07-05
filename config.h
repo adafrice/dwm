@@ -8,8 +8,10 @@ static const unsigned int gappiv    = 6;       /* vert inner gap between windows
 static const unsigned int gappoh    = 6;       /* horiz outer gap between windows and screen edge */
 static const unsigned int gappov    = 6;       /* vert outer gap between windows and screen edge */
 static       int smartgaps          = 0;        /* 1 means no outer gap when there is only one window */
-static const int showbar            = 1;        /* 0 means no bar */
-static const int topbar             = 1;        /* 0 means bottom bar */
+static const int showbar            = 1;        /* 0 means no standard bar */
+static const int topbar             = 1;        /* 0 means standard bar at bottom */
+static const int extrabar           = 1;        /* 0 means no extra bar */
+static const char statussep         = '\t';      /* separator between statuses */
 static const char *fonts[]          = { "FiraCode-Retina:pixelsize=12:antialias=true:autohint=true",
                                         "Symbols Nerd Font:pixelsize=12:antialias=true:autohint=true",
                                         "IPAGothic-10", /* Japanese */ };
@@ -36,6 +38,7 @@ static const Rule rules[] = {
 	/* class      instance    title       tags mask     isfloating   monitor */
 	{ "Gimp",     NULL,       NULL,       0,            1,           -1 },
 	{ "Firefox",  NULL,       NULL,       1 << 8,       0,           -1 },
+    { "zoom",     NULL,       NULL,       5,            1,           -1 },
 };
 
 /* layout(s) */
@@ -97,6 +100,7 @@ static const Key keys[] = {
 	{ MODKEY|ShiftMask,             XK_o,      setcfact,       {.f =  0.00} },
 	{ MODKEY,                       XK_Return, zoom,           {0} },
 	{ MODKEY,                       XK_Tab,    view,           {0} },
+    { MODKEY,                       XK_f,      togglefullscr,  {0} },
 	{ MODKEY,                       XK_q,      killclient,     {0} },
 	{ MODKEY,                       XK_t,      setlayout,      {.v = &layouts[0]} },
 	{ MODKEY,                       XK_s,      setlayout,      {.v = &layouts[1]} },
